@@ -1,0 +1,39 @@
+
+@import "~mixins";
+
+.modal-agency {
+ /deep/ .el-dialog__body {
+    .selected-tip {
+      margin: 10px 0 10px 30px;
+    }
+    .el-input {
+      margin: 0 auto 10px auto;
+      display: block;
+      width: 90%;
+    }
+    .el-input__inner {
+      padding-left: 10px;
+      width: 100%;
+      border-radius: 20px;
+    }
+    .el-input__prefix {
+      top: 2px;
+      left: inherit;
+      right: 12px;
+      line-height: 24px;
+    }
+    .el-input__prefix .iconfont-dmp-select {
+      font-size: 12px;
+    }
+    .el-form {
+      height: 200px;
+      overflow: auto;
+    }
+    .folder .agency {
+      max-width: none;
+    }
+  }
+  .footer {
+    text-align: center;
+  }
+}

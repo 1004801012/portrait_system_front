@@ -1,0 +1,30 @@
+{{#if template}}
+<template>
+  <div class="comp-{{ kebabCase name }}">
+    {{ kebabCase name }} 组件
+  </div>
+</template>
+{{/if}}
+
+{{#if script}}
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator'
+
+@Component({})
+export default class {{ properCase name }} extends Vue {
+  @Prop({
+    type: Object,
+    default () {
+      return {}
+    }
+  })
+  demoData!: any
+}
+</script>
+{{/if}}
+
+{{#if style}}
+<style lang="less" rel="stylesheet/less" scoped>
+  @import './style.less';
+</style>
+{{/if}}

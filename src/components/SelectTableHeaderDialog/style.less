@@ -1,0 +1,141 @@
+.group-msg-box {
+  padding-right: 15px;
+
+  .text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.group-row {
+  .nodata-card {
+    margin: 30px auto;
+  }
+}
+
+.search-no-data {
+  height: 28px;
+  line-height: 28px;
+  background-color: #EFF5FF;
+  padding-left: 15px;
+  cursor: pointer;
+}
+
+.group-attr-list {
+  margin-top: 10px;
+  height: 295px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  // el-tree
+  /deep/ .el-tree .el-tree-node .el-tree-node__content .el-tree-node__expand-icon.expanded {
+    font-family: "iconfont-dmp";
+    content: '\e664';
+    transform: rotate(0deg);
+  }
+
+  /deep/ .el-tree .el-tree-node .el-tree-node__content .el-tree-node__expand-icon.expanded:before {
+    font-family: "iconfont-dmp";
+    content: '\e664';
+  }
+
+  /deep/ .el-tree .el-tree-node .el-tree-node__content .el-tree-node__expand-icon:before {
+    font-family: "iconfont-dmp";
+    content: '\e665';
+  }
+
+  /deep/ .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+    color: black;
+    font-weight: 400;
+  }
+
+  /deep/ .el-tree .el-tree-node .el-tree-node__content .el-tree-node__label {
+    font-size: 12px;
+  }
+}
+
+.group-card {
+  width: 240px;
+  height: 384px;
+  overflow: hidden;
+  border-color: #D9D9D9;
+
+  &.group-card-user {
+    /deep/ .h-card-body {
+      padding: 8px 0;
+    }
+  }
+
+  &:hover {
+    border-color: #D9D9D9;
+  }
+
+  /deep/ .h-card-head {
+    padding: 8px 16px;
+    border-color: #D9D9D9;
+  }
+
+  /deep/ .h-card-body {
+    padding: 0;
+  }
+
+  .group-query,
+  /deep/ .el-tree {
+    padding: 0 8px;
+  }
+
+  /deep/ .h-card-extra {
+    top: 7px;
+
+    .iconfont {
+      display: inline-block;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .selected-group {
+    li {
+      background-color: #F7F7F7;
+      border: 1px solid #D9D9D9;
+      border-radius: 2px;
+      padding: 0 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 26px;
+
+      span {
+        color: #333;
+      }
+    }
+
+    .iconfont {
+      color: #999;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.group-box-select {
+  height: 346px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  padding: 8px;
+
+  .group-name {
+    width: 180px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.group-pop {
+  color: #333;
+
+  .iconfont {
+    color: #F2B044;
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "code": "200",
+  "data": [
+    {
+      "childMenus": [],
+      "extend": "{\"components\":\"index\",\"leftMenu\":1,\"fullName\":\"\"}",
+      "icon": "iconshouye",
+      "id": "1",
+      "menuType": 0,
+      "name": "主页",
+      "orderNum": "0",
+      "parentId": "0",
+      "perms": "",
+      "url": "/index"
+    },
+    {
+      "childMenus": [],
+      "extend": "{\"components\":\"userPicture\",\"leftMenu\":1,\"fullName\":\"\"}",
+      "icon": "iconyonghu",
+      "id": "1389889042186428419",
+      "menuType": 0,
+      "name": "用户画像",
+      "orderNum": "3",
+      "parentId": "0",
+      "perms": "",
+      "url": "/userPicture"
+    },
+    {
+      "childMenus": [],
+      "extend": "{\"components\":\"pictureDetail\",\"leftMenu\":0,\"fullName\":\"\"}",
+      "icon": "iconyonghu",
+      "id": "138988904218642841123",
+      "menuType": 0,
+      "name": "画像详情",
+      "orderNum": "3",
+      "parentId": "0",
+      "perms": "",
+      "url": "/pictureDetail"
+    },
+    {
+      "childMenus": [
+        {
+          "childMenus": [],
+          "extend": "{\"components\":\"groupAdd\",\"leftMenu\":1,\"fullName\":\"\"}",
+          "icon": "",
+          "id": "1469741912904269826",
+          "menuType": 0,
+          "name": "新建客群",
+          "orderNum": "1",
+          "parentId": "1366019444966047745",
+          "perms": "",
+          "url": "/groupAdd"
+        },
+        {
+          "childMenus": [],
+          "extend": "{\"components\":\"groupList\",\"leftMenu\":1,\"fullName\":\"\"}",
+          "icon": "",
+          "id": "146974191290426234",
+          "menuType": 0,
+          "name": "客群列表",
+          "orderNum": "1",
+          "parentId": "1366019444966047745",
+          "perms": "",
+          "url": "/groupList"
+        },
+        {
+          "childMenus": [],
+          "extend": "{\"components\":\"clusterAnalysis\",\"leftMenu\":1,\"fullName\":\"\"}",
+          "icon": "",
+          "id": "14697123123",
+          "menuType": 0,
+          "name": "聚类分析",
+          "orderNum": "1",
+          "parentId": "1366019444966047745",
+          "perms": "",
+          "url": "/clusterAnalysis"
+        },
+        {
+          "childMenus": [],
+          "extend": "{\"components\":\"crowdDiffuse\",\"leftMenu\":1,\"fullName\":\"\"}",
+          "icon": "",
+          "id": "321123123123123",
+          "menuType": 0,
+          "name": "人群扩散",
+          "orderNum": "1",
+          "parentId": "1366019444966047745",
+          "perms": "",
+          "url": "/crowdDiffuse"
+        }
+      ],
+      "extend": "{\"components\":\"userManage\",\"leftMenu\":1,\"fullName\":\"\"}",
+      "icon": "iconguanyuwomen",
+      "id": "1366019444966047745",
+      "menuType": 0,
+      "name": "客群圈选",
+      "orderNum": "2",
+      "parentId": "0",
+      "perms": "",
+      "url": "/userManage"
+    },
+    {
+      "childMenus": [],
+      "extend": "{\"components\":\"tagManage\",\"leftMenu\":1,\"fullName\":\"\"}",
+      "icon": "iconhuabanfuben",
+      "id": "1389889042186428417",
+      "menuType": 0,
+      "name": "标签管理",
+      "orderNum": "3",
+      "parentId": "0",
+      "perms": "",
+      "url": "/tagManage"
+    }
+  ],
+  "msg": "操作成功"
+}

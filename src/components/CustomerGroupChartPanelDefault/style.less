@@ -1,0 +1,249 @@
+
+@import "~mixins";
+
+.chart-panel {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+}
+
+.head {
+  padding: 15px 20px;
+  position: relative;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.head .title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #333333;
+}
+
+.head .tag {
+  margin-left: 5px;
+  position: relative;
+  padding: 0 4px;
+  border: 1px solid #ff8866;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #ff8866;
+  vertical-align: 1px;
+}
+
+.head .tag::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-right-color: #ff8866;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+.head .tag::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-right-color: #FFFFFF;
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+.head .el-button {
+  margin: 0;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  width: 80px;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 12px;
+  background: #54a7fd;
+  border-radius: 3px;
+}
+
+.content {
+  margin: 0 auto;
+  padding: 20px 10px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.chart {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.el-button.el-button--primary.btn-main {
+  margin: 20px auto;
+  display: block;
+  background: #54a7fd;
+  border-radius: 100px;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+}
+
+
+.group-card {
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  // border: 1px solid #e4e4e4;
+  display: inline-block;
+  vertical-align: top;
+
+  .content {
+    height: 280px;
+    .flexbox();
+    .justify-content(center);
+
+    .chart {
+      height: 280px;
+    }
+
+    .nodata-card {
+      width: 100%;
+      padding-top: 80px;
+    }
+  }
+}
+
+.sex-card {
+  .content {
+    .align-items(flex-start);
+  }
+
+  span {
+    display: block;
+  }
+
+  .pic {
+    height: 80px;
+    display: inline-block;
+    background-repeat: no-repeat;
+  }
+}
+
+.vs {
+  font-size: 50px;
+  padding: 35px 50px;
+}
+
+.male,
+.female {
+  text-align: center;
+  padding-top: 35px;
+
+  span {
+    font-size: 24px;
+    padding-bottom: 15px;
+  }
+}
+
+.male {
+  color: @colorBlueMain;
+
+  .pic {
+    width: 75px;
+    background-image: url(~@/assets/images/sex_men.png);
+  }
+}
+
+.female {
+  color: #cf65fd;
+
+  .pic {
+    width: 70px;
+    background-image: url(~@/assets/images/sex_women.png);
+  }
+}
+
+.line {
+  width: 100%;
+  height: 280px;
+}
+
+.progress {
+  .content {
+    padding: 15px 20px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    .justify-content(flex-start);
+  }
+
+  .el-progress {
+    line-height: normal;
+  }
+
+  li {
+    width: 720px;
+    margin-bottom: 10px;
+    color: @colorBlackLight;
+    .flexbox();
+    .justify-content(flex-start);
+    .align-items(center);
+
+    span {
+      display: inline-block;
+      width: 15px;
+      text-align: left;
+    }
+
+    span {
+      font-weight: bold;
+      padding-right: 5px;
+    }
+  }
+
+  /deep/ .el-progress {
+    width: 85%;
+    .el-progress__text {
+      display: none;
+    }
+
+    .el-progress-bar {
+      padding-right: 0;
+    }
+
+    .el-progress-bar__outer {
+      background-color: #409eff;
+    }
+  }
+
+  b {
+    padding-left: 10px;
+  }
+
+  &.user-source {
+    li {
+      margin-bottom: 7px;
+    }
+  }
+}
+
+.behavior {
+  header {
+    border-right: 1px solid #e4e4e4;
+  }
+
+  .group-card {
+    width: 100%;
+    margin-bottom: 0;
+    border-bottom: none;
+    border-right: none;
+  }
+}
+
+.line1 {
+  .line-clamp(1);
+}

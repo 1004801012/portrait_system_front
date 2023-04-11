@@ -1,0 +1,86 @@
+
+@import "~mixins";
+@import "~variable";
+
+.customer-group-label-formula {
+  position: relative;
+  .condition-list {
+    position: relative;
+    width: 100%;
+  }
+  .condition-box {
+    .box-wrap {
+      border-left: 6px solid @colorBlueMain;
+    }
+  }
+  .multiselect {
+    width: 130px;
+  }
+  .multiselect, .multiselect__input, .multiselect__single {
+    font-size: 14px;
+  }
+  .condition {
+    position: relative;
+    min-height: 50px;
+    .wrap {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 50px;
+      padding: 0 12px;
+      background-color: #eeeff2;
+      & > * {
+        margin-right: 20px;
+      }
+    }
+    .operator {
+      min-width: 170px;
+      width: auto;
+      margin-right: 20px;
+    }
+    .input {
+      width: 150px;
+    }
+    .unit {
+      margin-left: 20px;
+    }
+  }
+  .or {
+    height: 40px;
+    line-height: 38px;
+    padding-left: 12px;
+    .el-checkbox {
+      width: auto;
+      padding: 3px 8px;
+      background: #EEEFF2;
+      border-radius: 3px;
+      line-height: normal;
+      +.el-checkbox {
+        margin-left: 15px;
+      }
+      .el-checkbox__inner {
+        z-index: 0;
+      }
+    }
+  }
+  .and {
+    height: 40px;
+    line-height: 40px;
+    margin-left: -10px;
+  }
+  .info {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 12px;
+    background-color: #eeeff2;
+  }
+  .close-panel {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    color: #b6bdc7;
+    .iconfont-dmp {
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@import "~variable";
+@import "~mixins";
+
+.comp-pagination-table {
+  background-color: #fff;
+  .el-table {
+    margin-bottom: 20px;
+    /deep/ .header-align-center {
+      th {
+        text-align: center;
+      }
+    }
+  }
+
+  .el-pagination {
+    background-color: @colorWhite;
+    padding: 9px 10px;
+    .flexbox();
+    .justify-content(flex-end);
+
+    /deep/ .el-pager {
+      .number {
+        color: @pagerTextColor;
+        &.active {
+          background-color: @searchButtonBgColor;
+          color: @colorWhite;
+        }
+      }
+    }
+  }
+}

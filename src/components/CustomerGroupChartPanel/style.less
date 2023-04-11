@@ -1,0 +1,325 @@
+
+@import "~mixins";
+
+.chart-panel {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+}
+.head {
+  padding: 15px 20px;
+  position: relative;
+  border-bottom: 1px solid #e4e4e4;
+}
+.head .title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #333333;
+}
+.head .tag {
+  margin-left: 5px;
+  position: relative;
+  padding: 0 4px;
+  border: 1px solid #ff8866;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #ff8866;
+  vertical-align: 1px;
+}
+.head .tag::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-right-color: #ff8866;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  margin-top: -4px;
+}
+.head .tag::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-right-color: #FFFFFF;
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  margin-top: -4px;
+}
+.head .el-button {
+  margin: 0;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  width: 80px;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 12px;
+  background: #54a7fd;
+  border-radius: 3px;
+}
+
+.content {
+  padding: 20px;
+  font-size: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.content .left {
+  display: inline-block;
+  padding: 30px 25px;
+  width: 300px;
+  height: 440px;
+  background: #f6f8f9;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px 0 0 3px;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+.content .left .label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666666;
+}
+.left .el-select {
+  margin-bottom: 20px;
+}
+.left .el-input--suffix .el-input__inner {
+  padding: 0 10px;
+  height: 28px;
+  width: 250px;
+  font-size: 14px;
+  background: #eeeeee;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+}
+.left .el-select > .el-input {
+  height: 28px;
+}
+.left .el-checkbox {
+  margin-bottom: 10px;
+}
+.left .el-checkbox__label {
+  font-size: 12px;
+  color: #999999;
+  line-height: 14px;
+}
+.left .btn-mini.el-button {
+  margin-bottom: 20px;
+  width: 250px;
+  height: 28px;
+  background: #eeeeee;
+  border: 1px solid #e4e4e4;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 100;
+  color: #666666;
+  box-shadow: none;
+  text-align: left;
+}
+.left .btn-mini.el-button:focus,
+.left .btn-mini.el-button:hover {
+  box-shadow: none;
+  color: #666666;
+  background: #eeeeee;
+}
+
+.content .right {
+  padding-top: 20px;
+  position: relative;
+  display: inline-block;
+  width: 858px;
+  height: 440px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-left: none;
+  border-radius: 0 3px 3px 0;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+.right .chart {
+  height: 400px;
+}
+.right .panel {
+  margin: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.right .panel i {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #CCCCCC;
+  cursor: pointer;
+}
+.right .panel .actived {
+  color: #54a7fd;
+}
+.right .panel .disabled {
+  cursor: not-allowed;
+}
+
+.el-button.el-button--primary.btn-main {
+  margin: 20px auto;
+  display: block;
+  background: #54a7fd;
+  border-radius: 100px;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+}
+
+// 标签选择弹窗
+.modal-tag {
+  .el-dialog__body {
+    position: relative;
+    padding: 11px 10px 10px 10px;
+    box-sizing: border-box;
+  }
+  .el-autocomplete {
+    width: 100%;
+  }
+  .el-input__inner {
+    height: 32px;
+    font-size: 12px;
+  }
+  .el-input__prefix {
+    line-height: 30px;
+  }
+  .center .el-input__inner {
+    z-index: 4;
+  }
+  .center .el-input__prefix {
+    left: 268px;
+    z-index: 2;
+  }
+  .default-txt {
+    padding-left: 10px;
+    font-size: 12px;
+  }
+  .el-input__prefix .iconfont-dmp-select {
+    padding-left: 4px;
+    line-height: 32px;
+    font-size: 12px;
+  }
+  .el-dialog__footer {
+    padding: 13px 0;
+    background-color: #F2F4F9;
+    border-radius: 0 0 10px 10px;
+  }
+  .el-dialog__footer .el-button {
+    padding: 12px 35px;
+  }
+  .hidekey {
+    opacity: 0;
+  }
+  .attr-tag-tree {
+    height: 100%;
+    padding: 10px;
+    background-color: #fff;
+    overflow: auto;
+    box-sizing: border-box;
+    &::-webkit-scrollbar-thumb:vertical {
+      height: 8px;
+      background-color: #ededed;
+      -webkit-border-radius: 8px;
+    }
+    &::-webkit-scrollbar-thumb:horizontal {
+      width: 8px;
+      background-color: #ededed;
+      -webkit-border-radius: 8px;
+    }
+  }
+  .radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .radio-item {
+    display: inline-flex;
+    margin-left: 0;
+    margin-right: 30px;
+    padding: 15px 0 2px 14px;
+    // width: 120px;
+    box-sizing: border-box;
+  }
+}
+.search-input{
+  .iconfont-dmp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 25px;
+  }
+}
+.add-middle {
+  margin-top: 10px;
+  height: 180px;
+  border: solid 1px @colorBorderLine;
+}
+.add-middle .left {
+  position: relative;
+  float: left;
+  width: 155px;
+  height: 100%;
+  &::after {
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background-color: @colorBorderLine;
+    z-index: 2;
+  }
+}
+.add-middle .right {
+  float: left;
+  .calc(width,'100% - 155px');
+  height: 100%;
+  overflow: auto;
+}
+
+// 删除
+.modal-delete {
+  .el-dialog__body {
+    position: relative;
+    padding: 11px 10px 10px 10px;
+    box-sizing: border-box;
+  }
+  .title-delete {
+    margin: 40px auto 20px auto;
+    text-align: center;
+  }
+}
+
+// 保存
+.modal-save {
+  .el-dialog__body {
+    position: relative;
+    padding: 11px 10px 10px 10px;
+    box-sizing: border-box;
+  }
+  .save-content {
+    padding: 20px 40px;
+  }
+  .el-input__inner {
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid #E4E4E4;
+    border-radius: 0;
+  }
+}
+
+.result-confirm {
+  text-align: center;
+  .el-button+.el-button {
+    margin-left: 20px;
+  }
+}

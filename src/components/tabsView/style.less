@@ -1,0 +1,137 @@
+@import "~variable";
+
+.tabs-view-container {
+  box-sizing: border-box;
+  border-top: 1px solid rgb(232, 232, 232);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+
+  .h-tag-close-tip {
+    display: none;
+    position: fixed;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    padding: 2px 0;
+    background-color: #fff;
+    height: auto;
+    width: 145px;
+    z-index: 1;
+    &-item {
+      display: block;
+      outline: none;
+      list-style: none;
+      cursor: pointer;
+      height: 32px;
+      line-height: 32px;
+      font-size: 13px;
+      span {
+        display: block;
+        padding-left: 10px
+      }
+      &:hover {
+        background-color: #4a94fa;
+        color: #fff;
+      }
+    }
+  }
+  .tag-operation {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+  }
+
+  .tag-position-change {
+    position: relative;
+    transition: all .2s;
+  }
+}
+
+.tag-view-container {
+  white-space: nowrap;
+  float: left;
+  width: calc(100% - 40px);
+  overflow: hidden;
+
+  .tag-item {
+    display: inline-block;
+    vertical-align: top;
+
+    &:last-child {
+      .tag-container {
+        border-right: 1px solid rgb(232, 232, 232);
+      }
+    }
+  }
+}
+
+
+.tag-container {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 15px;
+  padding-right: 20px;
+  border-left: 1px solid rgb(232, 232, 232);
+  cursor: pointer;
+  color: @NotCurTagColor;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: @curTagColor;
+    transition: all .3s;
+  }
+
+  &.current-tag {
+    color: @curTagColor;
+    background-color: @mainBgColor;
+    //border-top: 1px solid @curTagColor;
+
+    &::after {
+      width: 100%;
+      animation: tag-top-border .3s linear;
+    }
+  }
+
+  &:hover {
+    color: @curTagColor;
+    background-color: @mainBgColor;
+    //border-top: 1px solid @curTagColor;
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  .tag-text {
+    margin-right: 20px;
+  }
+
+  .el-icon-close {
+    &:hover {
+      background-color: #FF5722;
+      color: #fff;
+      border-radius: 100%;
+    }
+  }
+
+  @keyframes tag-top-border {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+}

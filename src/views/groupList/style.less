@@ -1,0 +1,269 @@
+//----------------------------------
+//
+//**
+// *
+// * @authors Administrator (you@example.org)
+// * @date    2017/6/14 13:35
+// * @version $
+// * @desc 客群管理
+// */
+//----------------------------------
+
+@import "~mixins";
+@import '~variable';
+
+.customer-group-dialog {
+  .el-dialog__body {
+    max-height: 400px;
+    overflow: scroll;
+  }
+
+}
+
+.customer-group-manage {
+  .group-info {
+    height: auto;
+    min-height: 632px;
+  }
+  .invalid-content {
+    padding-top: 14%;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #e4e4e4;
+    &>p:nth-of-type(2) {
+      margin-bottom: 20px;
+    }
+  }
+  .condition {}
+
+  .filter-box {
+    padding: 15px 15px 0 15px;
+    min-height: 70px;
+    margin-bottom: 10px;
+    position: relative;
+
+    p {
+      .flexbox();
+      min-height: 30px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: inline-block;
+      min-width: 80px;
+      vertical-align: middle;
+    }
+
+    .el-input {
+      vertical-align: middle;
+      width: 200px;
+    }
+
+    .el-input__inner {
+      height: 30px;
+      line-height: 30px;
+      width: 200px;
+    }
+
+    .filter-box-content {
+      .flexbox();
+      .align-items(center);
+      margin-bottom: 15px;
+      font-size: 14px;
+      input {
+        width: 300px;
+      }
+      a {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        margin-left: 15px;
+        color: @colorWhite;
+        border-radius: 3px;
+        background-color: @colorBlueMain;
+        text-align: center;
+        font-size: 12px;
+
+        .iconfont-dmp {
+          font-size: 12px;
+        }
+
+        &.disabled {
+          width: auto;
+          height: auto;
+          line-height: normal;
+          padding: 3px 5px;
+          background: #EF7700;
+          border-radius: 3px;
+        }
+      }
+    }
+    .group-valid-date {
+      width: 100%;
+      height: 38px;
+      background: #F7F7F7;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      line-height: 38px;
+      padding: 0 15px;
+      display: flex;
+      align-items: center;
+      & > div:nth-of-type(1) {
+        margin-right: 40px;
+      }
+      & > div:nth-of-type(2) {
+        margin-right: 10px;
+      }
+      .key {
+        font-size: 12px;
+        color: #999999;
+        line-height: 12px;
+      }
+      .value {
+        font-size: 12px;
+        color: #333333;
+        line-height: 12px;
+      }
+    }
+  }
+
+  .export-link {
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 4px;
+    padding-left: 10px;
+
+    .icon {
+      margin-right: 3px;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+
+  .pl60 {
+    padding: 15px 0 0 55px;
+  }
+
+  .btn-update-name {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 10px 0 10px;
+  }
+
+  .info {
+    width: 340px;
+    height: 280px;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -170px;
+    margin-top: -140px;
+
+    h3,
+    p {
+      text-align: left;
+    }
+
+    h3 {
+      font-size: 16px;
+      color: @colorBlack;
+      padding-bottom: 15px;
+    }
+
+    p {
+      color: @colorBlackLight;
+      line-height: 24px;
+    }
+
+    .el-button {
+      margin-top: 50px;
+      font-size: 18px;
+
+      &.is-round {
+        padding: 15px 50px;
+        border-radius: 100px;
+      }
+    }
+  }
+
+  .del-box {
+    width: 270px;
+    height: 270px;
+    text-align: center;
+    position: absolute;
+    margin-left: -135px;
+    margin-top: -135px;
+    top: 60%;
+    left: 50%;
+
+    .ad {
+      display: inline-block;
+      width: 130px;
+      height: 123px;
+      background: url(./bg_deled.png) no-repeat;
+      margin-bottom: 15px;
+    }
+
+    p {
+      padding: 3px 0;
+    }
+  }
+
+  .el-button-export {
+    padding: 12px 14px;
+    height: 30px;
+    line-height: 6px;
+  }
+}
+
+.group-list-zt2 {
+  &.customer-group-picture .group-info {
+    min-width: 830px;
+    position: relative;
+  }
+
+  .save-list-box {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    .h-btn {
+      margin: 3px 8px;
+    }
+  }
+
+  .saved {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin: 3px 8px;
+    color: @colorBlueMain;
+    border-radius: 3px;
+    text-align: center;
+
+    .iconfont-dmp {
+      text-align: center;
+      font-size: 22px;
+    }
+  }
+
+  .condition {
+    margin-right: 80px;
+  }
+}
+
+.group-update-dialog {
+  .h-row {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    .align-right {
+      text-align: right;
+    }
+  }
+}

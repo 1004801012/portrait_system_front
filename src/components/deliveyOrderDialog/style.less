@@ -1,0 +1,104 @@
+@import "~variable";
+.msg-container {
+  padding: 0 47px;
+
+  .msg-rate-container {
+    margin-bottom: 20px;
+    .el-col {
+      text-align: center;
+      height: 26px;
+      line-height: 26px;
+      margin-bottom: 8px;
+
+      &.serve-channel-rate {
+        background-color: @serveChannelBgColor;
+      }
+
+      &.unsigned-channel-rate {
+        background-color: @unsignedChannelBgColor;
+      }
+
+      &.signed-channel-rate {
+        background-color: @signedChannelBgColor;
+      }
+
+      /deep/ .el-input__inner {
+        height: 26px;
+      }
+
+      /deep/ .el-form-item__content {
+        line-height: 26px;
+      }
+    }
+
+    .edit-channel-title {
+
+      &:first-child {
+        font-size: 16px;
+        text-align: left;
+        background: none;
+      }
+      &.serve-channel-rate-title {
+        color: #E88DEF;
+      }
+      &.unsigned-channel-rate-title {
+        color: #8792F2;
+      }
+      &.signed-channel-rate-title {
+        color: #FFA896;
+      }
+    }
+  }
+  .el-form-item {
+    margin-bottom: 20px;
+
+    //  表单校验成功颜色
+    /deep/ &.is-success {
+      .el-input__validateIcon {
+        color: @validateSuccessColor;
+      }
+      .el-input__inner {
+        border-color: @validateSuccessColor;
+      }
+    }
+  }
+  .el-tree {
+    padding-top: 7px;
+  }
+  .dialog-footer {
+    text-align: right;
+
+    .el-button {
+      height: 30px;
+      width: 80px;
+      text-align: center;
+      padding: 0;
+
+      &.submit-button {
+        background-color: @searchButtonBgColor;
+        border: 1px solid @searchButtonBgColor;
+      }
+    }
+  }
+
+  /deep/ .switch-style .el-switch__label {
+    position: absolute;
+    display: none;
+    color: #fff;
+  }
+  /deep/ .switch-style .el-switch__label--left {
+    z-index: 9;
+    left: 21px;
+  }
+  /deep/ .switch-style .el-switch__label--right {
+    z-index: 9;
+  }
+  /deep/ .switch-style .el-switch__label.is-active {
+    display: block;
+  }
+}
+
+/deep/ .el-dialog__body {
+  max-height: 70vh;
+  overflow: auto;
+}

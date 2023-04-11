@@ -1,0 +1,126 @@
+@import "~variable";
+
+
+.main-container {
+
+  .left-menu-container {
+    position: fixed;
+    left: 0;
+    top: 50px;
+    bottom: 0;
+    overflow-x: hidden;
+    width: 221px;
+    background-color: @leftMenuColor;
+    font-size: 22px;
+
+    &.collapse-menu {
+      width: 65px;
+      animation: slice-left .7s;
+
+      /deep/ .el-menu-item {
+        [class^=el-icon-] {
+          margin-right: 25px;
+        }
+      }
+    }
+
+    &.collapse-animate-menu {
+      animation: slice-left-reverse .7s;
+    }
+
+    .left-menu-scroller-container {
+      width: 241px;
+      position: relative;
+      height: 100%;
+      overflow-x: hidden;
+    }
+  }
+
+  .header-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 100;
+  }
+
+  .menu-tab {
+    position: fixed;
+    top: 50px;
+    left: 220px;
+    right: 0;
+    height: 40px;
+    z-index: 1;
+
+    &.collapse-menu-tab {
+      left: 65px;
+      animation: main-slice .7s;
+    }
+    &.collapse-animate-menu-tab {
+      animation: main-slice-reverse .7s;
+    }
+  }
+
+  .main-content-container {
+    position: fixed;
+    top: 90px;
+    left: 220px;
+    right: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: @mainBgColor;
+
+    &.collapse-main-container {
+      left: 65px;
+      animation: main-slice .7s;
+    }
+
+    &.collapse-animate-container {
+      animation: main-slice-reverse .7s;
+    }
+  }
+
+  .main-root {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+}
+
+@keyframes slice-left {
+  0% {
+    width: 221px;
+  }
+  100% {
+    width: 65px;
+  }
+}
+@keyframes slice-left-reverse {
+  0% {
+    width: 65px;
+
+  }
+  100% {
+    width: 221px;
+  }
+}
+
+@keyframes main-slice {
+  0% {
+    left: 221px;
+  }
+  100% {
+    left: 65px;
+  }
+}
+@keyframes main-slice-reverse {
+  0% {
+    left: 65px;
+  }
+  100% {
+    left: 221px;
+  }
+}
+

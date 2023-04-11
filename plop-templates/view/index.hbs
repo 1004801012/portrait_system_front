@@ -1,0 +1,24 @@
+{{#if template}}
+<template>
+  <div class="{{ kebabCase name }}-container">
+    {{ kebabCase name }} 视图
+  </div>
+</template>
+{{/if}}
+
+{{#if script}}
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({})
+export default class {{ properCase name }} extends Vue {
+
+}
+</script>
+{{/if}}
+
+{{#if style}}
+<style lang="less" rel="stylesheet/less" scoped>
+  @import './style.less';
+</style>
+{{/if}}

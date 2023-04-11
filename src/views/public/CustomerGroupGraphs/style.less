@@ -1,0 +1,216 @@
+
+@import "~mixins";
+@import "~variable";
+
+.no-charts {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.customer-group-graphs {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 2px;
+  .el-loading-spinner {
+    top: 10%;
+  }
+
+  header {
+    border-bottom: 1px solid #e4e4e4;
+    padding: 8px 10px;
+
+    .title {
+      padding-left: 15px;
+    }
+  }
+
+  .el-table--border {
+    border-left: 0;
+    border-right: 0;
+    border-top: none;
+    border-color: #e4e4e4;
+  }
+
+  .el-table th > .cell {
+    text-align: center;
+    color: @colorBlack;
+  }
+
+  .el-table td {
+    text-align: center;
+  }
+
+  .el-table td,
+  .el-table th {
+    border-color: #e4e4e4;
+  }
+
+  .el-table--border:after {
+    background-color: transparent;
+  }
+
+  .group-card {
+    width: 49%;
+    margin:0 0 8px 0;
+    border-radius: 3px;
+    border: 1px solid #e4e4e4;
+    display: inline-block;
+    vertical-align: top;
+    //flex:2;
+    header {
+      border-top: none;
+    }
+
+    .content {
+      padding-top: 0;
+      height: 300px;
+      .flexbox();
+      .justify-content(center);
+
+      .nodata-card {
+        width: 100%;
+        padding-top: 80px;
+      }
+    }
+  }
+  //.group-card:nth-child(odd){
+  //  margin-right: 8px;
+  //}
+  //.group-card:nth-last-child(1){
+  //  flex:1;
+  //  margin-right: 8px;
+  //}
+  .sex-card {
+    padding: 20px 70px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .vs {
+    font-size: 50px;
+    padding: 35px 0;
+  }
+
+  .male,
+  .female {
+    text-align: center;
+    padding-top: 35px;
+
+    span {
+      display: block;
+      font-size: 24px;
+      padding-bottom: 15px;
+    }
+
+    .pic {
+      height: 80px;
+      display: inline-block;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .male {
+    color: @colorBlueMain;
+
+    .pic {
+      width: 75px;
+      background-image: url(~@/assets/images/sex_men.png);
+    }
+  }
+
+  .female {
+    color: #cf65fd;
+
+    .pic {
+      width: 70px;
+      background-image: url(~@/assets/images/sex_women.png);
+    }
+  }
+
+  .line {
+    width: 100%;
+    height: 300px;
+  }
+
+  .progress {
+    padding: 15px 20px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    .justify-content(flex-start);
+    // .content {
+    //   padding: 15px 20px;
+    //   padding-left: 15px;
+    //   padding-bottom: 10px;
+    //   .justify-content(flex-start);
+    // }
+    .el-progress {
+      line-height: normal;
+    }
+
+    li {
+      width: 420px;
+      margin-bottom: 10px;
+      color: @colorBlackLight;
+      .flexbox();
+      .justify-content(flex-start);
+      .align-items(center);
+
+      span {
+        display: inline-block;
+        width: 15px;
+        text-align: left;
+      }
+
+      span {
+        font-weight: bold;
+        padding-right: 5px;
+      }
+    }
+
+    .el-progress {
+      width: 85%;
+    }
+
+    .el-progress__text {
+      display: none;
+    }
+
+    .el-progress-bar {
+      padding-right: 0;
+    }
+
+    .el-progress-bar__outer {
+      background-color: #409eff;
+    }
+
+    b {
+      padding-left: 10px;
+    }
+
+    &.user-source {
+      li {
+        margin-bottom: 7px;
+      }
+    }
+  }
+
+  .behavior {
+    header {
+      border-right: 1px solid #e4e4e4;
+    }
+
+    .group-card {
+      width: 100%;
+      margin-bottom: 0;
+      border-bottom: none;
+      border-right: none;
+    }
+  }
+
+  .line1 {
+    .line-clamp(1);
+  }
+
+}
+

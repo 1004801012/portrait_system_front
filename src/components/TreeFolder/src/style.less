@@ -1,0 +1,64 @@
+
+@import "~mixins";
+
+.tree-folder {
+  padding-left: 20px;
+  cursor: pointer;
+  .inside {
+    padding-left: 20px;
+  }
+  .folder {
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 2px;
+    .agency {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 200px;
+    }
+    .edit {
+      display: none;
+    }
+  }
+  .folder:hover {
+    background-color: rgba(84,167,253,.2);
+    .edit {
+      display: block;
+    }
+    .edit i:hover {
+      color: #54A7FD;
+    }
+  }
+  //.folder.selected {
+  //  background-color: rgba(84,167,253,.2);
+  //}
+  // 最外层不显示编辑图标
+  .folder.unedit .edit {
+    display: none;
+  }
+  .folder .iconfont-dmp-editor,
+  .folder .iconfont-dmp-trash {
+    padding-right: 5px;
+  }
+  .folder .iconfont-dmp-tree-open,
+  .folder .iconfont-dmp-tree-close {
+    padding-right: 10px;
+    color: #979797;
+    vertical-align: -1px;
+  }
+  .folder .iconfont-dmp-folder-open,
+  .folder .iconfont-dmp-folder-close {
+    padding-right: 5px;
+    color: #9CB1C6;
+    vertical-align: -1px;
+  }
+  .folder .hidden {
+    visibility: hidden;
+  }
+  .folder p {
+    color: @colorBlackLight;
+  }
+}
