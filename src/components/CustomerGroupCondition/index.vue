@@ -13,9 +13,9 @@
       >
       <span v-if="conditions.length - 1 !== index">且</span>
     </template>
-    <router-link v-if="isCanEdit" class="edit-condition" :to="to()">
-      <i class="icon iconfont-dmp iconfont-dmp-edit"></i><span>编辑条件</span></router-link
-    >
+<!--    <router-link v-if="isCanEdit" class="edit-condition" :to="to()">-->
+<!--      <i class="icon iconfont-dmp iconfont-dmp-edit"></i><span>编辑条件</span></router-link-->
+<!--    >-->
   </div>
 </template>
 

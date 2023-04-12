@@ -317,7 +317,7 @@
     border-radius: 3px;
     box-sizing: border-box;
     background-color: #fff;
-    height: 590px;
+    height: 632px;
 
     &::-webkit-scrollbar-thumb:vertical {
       height: 8px;

@@ -497,7 +497,7 @@
           group_id: id
         };
         try {
-          const res = await this.$services.customUserGroupOpQry({ data });
+          const res = await this.$services.getGroupInfo({ data });
           res &&
             callback(
               res,

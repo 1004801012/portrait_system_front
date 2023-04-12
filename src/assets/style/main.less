@@ -1,0 +1,114 @@
+@import "~mixins";
+
+.iconfont-dmp {
+  vertical-align: middle;
+  position: relative;
+  display: inline-block;
+}
+
+.no-data {
+  padding: 10px 0;
+  font-size: 16px;
+  text-align: center;
+  color: #999;
+}
+
+.pages {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+// loading遮罩
+.loading {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.scroll-y {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// layout
+.app-wrapper {
+  .clearfix();
+  position: relative;
+  height: 100%;
+  width: 100%;
+  .main-container {
+    width: 1200px;
+    margin: 0 auto;
+    //min-height: 100%;
+    min-height: calc(~"100% - 61px");
+  }
+  .main-container-tags-search {
+    min-height: calc(~"100% - 141px");
+  }
+  .home-page {
+    width: 100%;
+  }
+  &.nowrap {
+    .main-container {
+      width: 100%;
+    }
+  }
+}
+
+// 滚动条
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+//::-webkit-scrollbar-track-piece {
+//  background-color: rgba(0, 0, 0, 0.2);
+//  -webkit-border-radius: 6px;
+//}
+//
+::-webkit-scrollbar-thumb:vertical {
+  height: 8px;
+  background-color: rgba(125, 125, 125, 0.7);
+  -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: 8px;
+  background-color: rgba(125, 125, 125, 0.7);
+  -webkit-border-radius: 6px;
+}
+
+
+//::-webkit-scrollbar-corner {
+//   background-color: transparent;
+//
+// }
+//fontColor
+.font-black{
+  color: #333;
+}
+.font-red {
+  color: #FF2323;
+}
+
+.font-green {
+  color: #3BEA00;
+}
+
+.font-light-red {
+  color: #FF8866;
+}
+.font-blue{
+  color: #54A7FD;
+}
+.noData{
+  width: 100%;
+  height: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

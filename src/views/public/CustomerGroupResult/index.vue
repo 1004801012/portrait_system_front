@@ -13,92 +13,8 @@
       <span class="title">已为您找到满足条件的<em>{{ usersTotalCount }}</em>名客户
         {{ usersTotalCount > 10000 ? '，列表展示前10000名客户' : '' }}
       </span>
-        <div>
-          <h-tooltip content="列表" transfer placement="top-end">
-            <div :class="{'active': activeIndex === '1'}" class="table-switch" @click="switchPane('1');">
-              <i class="iconfont-dmp iconfont-dmp-list-view"></i>
-            </div>
-          </h-tooltip>
-          <!--  静态客群不展示视图按钮 （国元专有）-->
-          <h-tooltip content="视图" transfer placement="top-end" v-if="+groupImportType === 1">
-            <div :class="{'active': activeIndex === '0'}" class="table-switch" @click="switchPane('0');">
-              <i class="iconfont-dmp iconfont-dmp-chart-view"></i>
-            </div>
-          </h-tooltip>
-          <h-tooltip v-if="activeIndex === '1'" content="导出" transfer placement="top-end">
-            <h-spin v-if="exportLoading" fix></h-spin>
-            <div class="table-switch" @click="exportLink">
-              <i class="iconfont-dmp iconfont-dmp-download2"></i>
-            </div>
-          </h-tooltip>
-          <h-tooltip v-if="activeIndex === '0'" content="导出" transfer placement="top-end">
-            <div class="table-switch" @click="exportReport">
-              <i class="iconfont-dmp iconfont-dmp-download2"></i>
-            </div>
-          </h-tooltip>
-        </div>
       </header>
       <div class="tab-content">
-        <div class="tab-pane" v-show="activeIndex === '0'">
-          <div class="content-block-box">
-            <div class="select-module">
-              <div class="el-input el-input--medium el-input--suffix"
-                   v-click-outside="onClickOutside"
-                   @click="popperVisible = !popperVisible">
-                <input type="text" autocomplete="off" placeholder="模块选择" readonly="readonly" class="el-input__inner">
-                <span class="el-input__suffix">
-                <span class="el-input__suffix-inner">
-                  <i class="el-select__caret el-input__icon el-icon-arrow-up"></i>
-                </span>
-              </span>
-              </div>
-              <!--模块集合-->
-              <div class="el-select-dropdown el-popper"
-                   @click.stop
-                   v-show="popperVisible">
-                <div class="el-scrollbar">
-                  <p>展示模块<span>拖动模块进行排序</span></p>
-                  <div class="view-pool">
-                    <div
-                      class="pool-item"
-                      v-for="item in displayModules"
-                      :key="item.label"
-                      v-dragging="{ item: item, list: displayModules, group: 'item' }"
-                      @dblclick="delViewItem(item)"
-                    >{{ item.label }}
-                    </div>
-                  </div>
-                  <el-button class="btn-manage" size="mini" type="primary" @click="customDisplayViewSort()"
-                             :disabled="!saveAble">保存
-                  </el-button>
-                  <p>模块池<span>双击添加模块</span></p>
-                  <div class="view-list">
-                    <div class="view-item" v-for="item in allModules" :key="item.label" @dblclick="addViewItem(item)">
-                      {{ item.label }}
-                    </div>
-                    <div class="view-item" @click="linkToPage(0)">创建视图+</div>
-                  </div>
-                  <el-button class="btn-manage" size="mini" type="primary" @click="linkToPage(1)">管理视图模块</el-button>
-                </div>
-                <div x-arrow class="popper__arrow"></div>
-              </div>
-            </div>
-            <div>
-              <h-button type="ghost" @click="linkToPage(0)">自定义视图</h-button>
-            </div>
-          </div>
-          <div class="detail-content">
-            <CustomerGroupGraphs
-              ref="groupGraphs"
-              :id="id"
-              :snapshot-id="snapshotId"
-              :result-type="resultType"
-              :displayModulesList="selectModules"
-              :customViewList="customViewList"
-            ></CustomerGroupGraphs>
-          </div>
-        </div>
-
         <div class="tab-pane" v-show="activeIndex === '1'">
           <el-table
             empty-text="暂无数据"
@@ -117,7 +33,7 @@
                  <span v-if="scope.row.potrait_status && scope.row.potrait_status+'' === '0'">找不到该用户</span>
                  <router-link
                    v-else
-                   :to="`/individualPicture/general?fund_account=${ scope.row.fund_account}&client_name=${scope.row.client_name}`"
+                   :to="`/pictureDetail?fundAccount=${ scope.row.fund_account}&client_name=${scope.row.client_name}`"
                    v-show="scope.row.fund_account"
                  >
                  查看个体画像
@@ -492,11 +408,11 @@ export default {
         }
         try {
           if (this.resultType === 'customerGroup' || this.resultType === 'customerGroupPreview') {
-            res = await this.$services.groupUsersQry({data})
+            res = await this.$services.getGroupUserList({data})
           } else {
             data.group_id = ''
             data.snapshot_id = snapshotId
-            res = await this.$services.customUserGroupSnapshotUserQry({data})
+            res = await this.$services.getGroupUserList({data})
           }
           res &&
           callback(

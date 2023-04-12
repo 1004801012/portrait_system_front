@@ -36,8 +36,8 @@
       return {
         treeData: [],
         defaultProps: {
-          id: 'id',
-          label: 'name',
+          id: 'group_id',
+          label: 'group_name',
           tagCount: 'count',
           children: 'children'
         },
@@ -50,11 +50,7 @@
     watch: {
       groupName: {
         handler: debounce(function (name) {
-          if (Number(this.groupImportType) === 2) {
-            this.getGroupList(name, this.statusList);
-          } else {
-            this.getStaticCustomUserGroupQry(name);
-          }
+          this.getGroupList(name, this.statusList);
         }, 800),
         immediate: true
       }
@@ -128,7 +124,7 @@
         // console.log('handleNodeClick', data);
         if (node.isLeaf) {
           data['source'] = 'tree';
-          this.currentGroupId = data.id;
+          this.currentGroupId = data.group_id;
           this.$emit('tagSelect', data);
         }
       },
@@ -138,59 +134,13 @@
           status_list: statusList
         };
         // 静态客群
-        if (this.groupImportType !== '1') {
-          data['group_import_type'] = this.groupImportType;
-        }
+        data['group_type'] = this.groupImportType;
         name && (data['group_name'] = name);
         let res = {};
         try {
-          res = await this.$services.customUserGroupQry({ data });
+          res = await this.$services.getGroupList({ data });
           this.treeData = res.datas || [];
-          console.log('this.treeData', this.treeData);
-          if (Array.isArray(this.treeData) && this.treeData.length) {
-            this.treeData = this.treeData.filter((t) => t.children && t.children.length);
-          }
-          if (typeof cb === 'function') {
-            cb();
-            this.$emit('tagSelect', {
-              groupId: window.CT.CUSTOMER_GROUP_ID
-            });
-            return;
-          }
-          this.$refs.groupTree.store && (this.$refs.groupTree.store.defaultExpandAll = false);
-          if (this.currentGroupId) {
-            const currentTreeData = breadthQuery(this.treeData, Number(this.currentGroupId));
-            if (currentTreeData) {
-              this.expandIds.push(currentTreeData.id);
-              currentTreeData.source = 'tree';
-              // 设置当前选中高亮
-              this.$nextTick(() => {
-                this.$refs.groupTree.setCurrentKey(currentTreeData.id);
-              });
-              this.$emit('tagSelect', currentTreeData);
-              this.currentGroupId = '';
-            } else {
-              this.handleSelectTag();
-            }
-          } else {
-            this.handleSelectTag();
-          }
-        } catch (err) {
-          console.error('err', err);
-          this.treeData = [];
-        }
-      },
-      async getStaticCustomUserGroupQry(name, groupImportType = '1') {
-        console.log('getStaticCustomUserGroupQry');
-        const data = {};
-        name && (data['group_name'] = name);
-        let res = {};
-        try {
-          res = await this.$services.staticCustomUserGroupQry({ data });
-          this.treeData = res.datas;
-          if (Array.isArray(this.treeData) && this.treeData.length) {
-            this.treeData = this.treeData.filter((t) => t.children.length);
-          }
+          console.log(this.treeData);
           this.$refs.groupTree.store && (this.$refs.groupTree.store.defaultExpandAll = false);
           if (this.currentGroupId) {
             const currentTreeData = breadthQuery(this.treeData, Number(this.currentGroupId));
@@ -215,11 +165,11 @@
         }
       },
       handleSelectTag() {
-        const firstTreeData = this.treeData[0];
+        const firstTreeData = this.treeData;
         if (firstTreeData) {
-          this.expandIds = firstTreeData.children.map((v) => v.id) || [];
+          this.expandIds = firstTreeData.map((v) => v.id) || [];
           this.expandIds.push(firstTreeData.id);
-          const groupData = firstTreeData.children[0];
+          const groupData = firstTreeData[0];
           if (groupData) {
             groupData.source = 'tree';
             // 设置当前选中高亮
@@ -241,7 +191,7 @@
       },
       updateGroupName(id, name) {
         const parent = this.currentNode.parent;
-        const children = parent.data.children || parent.data;
+        const children = parent.data;
         const index = Array.isArray(children) && children.findIndex((d) => d.id === id);
         children[index]['name'] = name;
       },
@@ -250,7 +200,7 @@
           group_id: id
         };
         try {
-          const res = await this.$services.customUserGroupQry({ data });
+          const res = await this.$services.getGroupInfo({ data });
           res &&
             callback(
               res,

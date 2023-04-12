@@ -19,12 +19,8 @@
       <group-tree
         ref="groupTree"
         :groupName="customerGroupName"
-        :groupImportType="activeName === 'myGroup' ? '2' : '1'"
+        :groupImportType="activeName === 'myGroup' ? '1' : '2'"
         @tagSelect="handleSelected" />
-    </div>
-    <div class="footer">
-      <router-link class="del-customer-group" to="groupListDel">已删除客群</router-link>
-      <router-link class="new-customer-group" to="groupAdd">+新建客群</router-link>
     </div>
   </div>
 </template>
@@ -68,7 +64,7 @@
         let { groupId, groupType, status, source, groupImportType } = group;
         // 树状列表
         if (source && source === 'tree') {
-          groupId = group.id || groupId;
+          groupId = group.group_id || groupId;
           groupType = group.group_type || groupType;
         }
         this.selectedId = groupId;
@@ -85,17 +81,13 @@
         this.$emit('selectedCustomerGroup', groupId, isCanEdit, group);
       },
       handleClick(tab, event) {
-        this.loadList();
+        this.$nextTick(() => {
+          this.loadList();
+        })
       },
       loadList() {
-        if (this.activeName === 'myGroup') {
-          this.statusList = '0,3,4,6';
-          this.status = '0,3,4,6';
 
-          this.$refs.groupTree.getGroupList('', this.statusList);
-        } else {
-          this.$refs.groupTree.getStaticCustomUserGroupQry('', this.groupImportType);
-        }
+        this.$refs.groupTree.getGroupList('', this.statusList);
         this.customerGroupName = '';
         this.currentIndex = 0;
         // 滚动条置顶 IE有兼容性
