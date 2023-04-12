@@ -36,6 +36,9 @@
           :columns="columns" />
       </template>
     </div>
+    <div v-else style="width: 100%;height: 483px;background: #fff;padding-top: 160px">
+      <no-data></no-data>
+    </div>
   </div>
 </template>
 
@@ -44,6 +47,7 @@
   import { CustomerGroupCondition } from '@/components';
   import CustomerGroupList from './CustomerGroupList';
   import CustomerGroupResult from '../public/CustomerGroupResult';
+  import NoData from "@components/NoData/src/index";
   const longDate = '2099-12-31 23:59:59';
 
   export default {
@@ -112,6 +116,7 @@
       };
     },
     components: {
+      NoData,
       CustomerGroupCondition,
       CustomerGroupList,
       CustomerGroupResult
@@ -148,12 +153,12 @@
         this.id = id;
         this.groupId = id;
         this.columns = [];
+        if (!id) {
+          return
+        }
         const data = {
           group_id: id
         };
-        if (this.activeName === 'delGroup') {
-          data['group_import_type'] = groupImportType;
-        }
         try {
           this.groupQryLoading = true;
           const res = await this.$services.getGroupInfo({ data });
