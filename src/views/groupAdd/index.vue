@@ -10,7 +10,6 @@
           <!--                     class="btn-clear"-->
           <!--                     @click="cancelCustomerGroup">清空条件-->
           <!--          </el-button>-->
-          <el-button type="primary" size="mini" class="btn-clear" @click="importCustomerGroup">导入客群 </el-button>
           <p class="tips">选择左侧用户属性，进行客群查询，例如：</p>
           <div class="form-el">
             <label
@@ -23,7 +22,6 @@
             </div>
           </div>
           <div class="actions-button">
-            <el-button type="primary" round @click="goCustomerGroupPreview">查询结果 </el-button>
             <el-button type="primary" round @click="dialogControlFunc">{{ saveButtonText }} </el-button>
           </div>
         </div>
@@ -35,6 +33,7 @@
       :close-on-click-modal="false"
       :visible.sync="dialogVisible"
       center
+      append-to-body
       class="customer-group-dialog"
       @close="cleanData">
       <el-form>
@@ -46,62 +45,6 @@
         <el-button type="primary" round size="medium" @click="dialogVisible = false">取 消 </el-button>
         <el-button type="primary" round size="medium" @click="saveCustomerGroup">确定 </el-button>
       </div>
-    </el-dialog>
-    <el-dialog
-      title="导入客群"
-      :visible.sync="importDialogVisible"
-      center
-      class="customer-group-dialog upload-customer-group"
-      @closed="importDialogClose">
-      <el-form>
-        <div v-show="step === '1'">
-          <div class="upload-content">
-            <el-upload
-              ref="uploadFile"
-              :action="actionUrl"
-              :data="actionData"
-              :show-file-list="true"
-              :limit="1"
-              :file-list="uploadFileList"
-              :on-remove="removeFile"
-              :on-success="handleUpload">
-              <el-button size="mini" icon="iconfont-dmp iconfont-dmp-upload">上传文件</el-button>
-            </el-upload>
-            <span class="excel-tips">支持excel文件</span>
-          </div>
-          <el-link :underline="false" size="mini" icon="iconfont-dmp iconfont-dmp-download" :href="downloadExcelUrl">
-            下载模板
-          </el-link>
-          <p class="tips-info">说明：初次上传请下载模版，填充数据后上传；</p>
-
-          <div class="button-container">
-            <el-button type="primary" round size="medium" @click="nextStep">下一步 </el-button>
-          </div>
-        </div>
-        <!--        输入名称-->
-        <div v-show="step === '2'">
-          <p v-if="uploadExcelName" class="excel-img">
-            <img width="16" height="16" src="~@/assets/images/excel.png" alt="excel" />{{ uploadExcelName }}
-          </p>
-          <el-form-item>
-            <el-input v-model.trim="uploadGroupName" placeholder="请输入客群名称"></el-input>
-          </el-form-item>
-          <div class="button-container">
-            <el-button type="primary" round size="medium" @click="step = '1'">上一步 </el-button>
-            <el-button type="primary" round size="medium" @click="saveImportCustomerGroup">下一步 </el-button>
-          </div>
-        </div>
-        <div v-show="step === '3'" style="text-align: center">
-          <h5>{{ uploadGroupName }}</h5>
-          <p class="upload-success-tip">
-            <i class="el-icon-upload-success el-icon-circle-check"></i>&nbsp;客群上传成功
-          </p>
-          <div class="button-container">
-            <el-button type="primary" round size="medium" @click="goToCustomerGroup">查看客群 </el-button>
-            <el-button type="primary" round size="medium" @click="goAgainImport">继续上传 </el-button>
-          </div>
-        </div>
-      </el-form>
     </el-dialog>
   </div>
 </template>
