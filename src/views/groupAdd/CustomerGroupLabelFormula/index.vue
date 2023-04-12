@@ -33,9 +33,9 @@
                   <span slot="noResult">暂无数据</span>
                 </multiselect>
               </div>
-              <div v-else style="display: flex">
+              <div v-else style="display: flex;align-items: center">
                 <multiselect
-                  v-if="formula.label_value_type === 's'"
+                  v-if="formula.label_value_type === 'd'"
                   v-model="formula.operatorValue"
                   class="operator"
                   :options="operators"
