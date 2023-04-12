@@ -8,6 +8,7 @@ import './filters'
 import './services'
 import './router/router.interceptor'
 import './assets/style/app.less'
+import './assets/fonts/iconfont.css'
 import 'core-js/modules/es.array.push'
 //  element-ui
 import 'element-ui/lib/theme-chalk/index.css'

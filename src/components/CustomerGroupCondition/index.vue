@@ -2,12 +2,12 @@
   <div class="customer-group-condition">
     <template v-for="(item, index) in conditions">
       <span class="condition-label"
-        >（<h-tag v-if="item.desc">{{ item.desc }}</h-tag>
+        >（<div class="tag" v-if="item.desc">{{ item.desc }}</div>
         <template v-if="Array.isArray(item.sub) && item.sub.length">
           <template v-for="(subItem, subIndex) in item.sub">
             <i v-if="subItem.op + '' === '0'">或</i>
             <i v-if="subItem.op + '' === '3'">非</i>
-            <h-tag>{{ subItem.desc }}</h-tag>
+            <div class="tag">{{ subItem.desc }}</div>
           </template> </template
         >）</span
       >
@@ -94,5 +94,11 @@
         vertical-align: middle;
       }
     }
+  }
+  .tag {
+    padding: 4px 8px;
+    background: #eeeeee;
+    border-radius: 2px;
+    display: inline-block;
   }
 </style>
