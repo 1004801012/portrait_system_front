@@ -40,12 +40,7 @@
                  </router-link>
                </span>
                 <span v-else>
-                  <template v-if="project !== 'boci' && column.prop === 'mobile_tel'">
-                      {{ scope.row[column.prop] }}
-                  </template>
-                  <template v-else>
-                      {{ scope.row[column.prop] }}
-                  </template>
+                  {{ scope.row[column.prop] }}
                 </span>
               </template>
             </el-table-column>
@@ -366,92 +361,58 @@ export default {
       let newDisPlayView = this.displayModules.map(item => item.label)
       return this.displayView.join(';') !== newDisPlayView.join(';')
     },
-    /**
-     *
-     * 保存用户展示视图
-     */
-    async customDisplayViewSort () {
-      let list = []
-      this.displayModules.forEach(item => {
-        list.push(this.formatViewIdToValue(item.id))
-      })
-      const data = {
-        groupId: this.id,
-        viewListString: list.join(';') + ';'
-      }
-      try {
-        const res = await this.$services.customDisplayViewSort({data})
-        res && callback(res, () => {
-          if (this.id !== window.CT.CUSTOMER_GROUP_ID) {
-            this.$message({message: res.error_info, showClose: true})
-          }
-          this.onClickOutside()
-          this.customDisplayViewQry()
-        }, () => {
-          if (this.id !== window.CT.CUSTOMER_GROUP_ID) {
-            this.$message({message: res.error_info, showClose: true})
-          }
-        })
-      } catch (err) {
-        console.log('err', err)
-      }
-    },
     async getGroupUsers (groupId, state) {
       let res = null
       let {id, pageNo, pageSize, snapshotId} = this
       groupId && (id = groupId)
-      if (id && id !== window.CT.CUSTOMER_GROUP_ID) {
-        const data = {
-          group_id: id,
-          page_no: pageNo,
-          page_size: pageSize
+      const data = {
+        group_id: id,
+        page_no: pageNo,
+        page_size: pageSize
+      }
+      try {
+        if (this.resultType === 'customerGroup' || this.resultType === 'customerGroupPreview') {
+          res = await this.$services.getGroupUserList({data})
+        } else {
+          data.group_id = ''
+          data.snapshot_id = snapshotId
+          res = await this.$services.getGroupUserList({data})
         }
-        try {
-          if (this.resultType === 'customerGroup' || this.resultType === 'customerGroupPreview') {
-            res = await this.$services.getGroupUserList({data})
-          } else {
-            data.group_id = ''
-            data.snapshot_id = snapshotId
-            res = await this.$services.getGroupUserList({data})
-          }
-          res &&
-          callback(
-            res,
-            () => {
-              this.listTableData = []
-              this.listTableData = res.datas
-              this.usersTotalCount = res.total_count
-              this.isBuilding = false
-              this.buildLoading = false
-              window.clearInterval(this.timer)
-              if (state === 'complete') {
-                this.$refs.groupGraphs && this.$refs.groupGraphs.loadGroupGraphs()
-              }
-            },
-            () => {
-              if (res.error_no === '10005') {
-                this.isBuilding = true
-                this.buildLoading = false
-                if (!this.timer) {
-                  // 开启轮询
-                  this.openAutoQuery()
-                }
-              } else { // 其他错误
-                window.clearInterval(this.timer)
-                this.buildLoading = false
-                this.isBuilding = false
-                if ((snapshotId && snapshotId !== window.CT.CUSTOMER_GROUP_ID) || id !== window.CT.CUSTOMER_GROUP_ID) {
-                  this.$message({message: res.error_info, showClose: true})
-                }
-              }
-              this.resetQryCondition()
+        res &&
+        callback(
+          res,
+          () => {
+            this.listTableData = []
+            this.listTableData = res.datas
+            this.usersTotalCount = res.total_count
+            this.isBuilding = false
+            this.buildLoading = false
+            window.clearInterval(this.timer)
+            if (state === 'complete') {
+              this.$refs.groupGraphs && this.$refs.groupGraphs.loadGroupGraphs()
             }
-          )
-        } catch (err) {
-          console.log(err)
-          this.resetQryCondition()
-        }
-      } else {
+          },
+          () => {
+            if (res.error_no === '10005') {
+              this.isBuilding = true
+              this.buildLoading = false
+              if (!this.timer) {
+                // 开启轮询
+                this.openAutoQuery()
+              }
+            } else { // 其他错误
+              window.clearInterval(this.timer)
+              this.buildLoading = false
+              this.isBuilding = false
+              if ((snapshotId && snapshotId !== window.CT.CUSTOMER_GROUP_ID) || id !== window.CT.CUSTOMER_GROUP_ID) {
+                this.$message({message: res.error_info, showClose: true})
+              }
+            }
+            this.resetQryCondition()
+          }
+        )
+      } catch (err) {
+        console.log(err)
         this.resetQryCondition()
       }
     },
@@ -471,57 +432,6 @@ export default {
       this.listTableData = []
       this.pageNo = 1
       this.usersTotalCount = 0
-    },
-    exportReport () {
-      const url = '/groupPreviewGraphsReport'
-      const param = {
-        id: this.id,
-        total_count: this.usersTotalCount,
-        resultType: this.resultType
-        // checkModules: JSON.stringify(this.selectModules)
-      }
-      this.$router.push({path: url, query: param})
-    },
-    exportLink () {
-      // const newLink = combineURLs(window.DMP_CONFIG.API_HOME, `${window.DMP_CONFIG.PREFIX}/custom_user_group_user_info_export?group_id=${this.id}&access_token=${getToken()}&resultType=${this.resultType}`)
-      this.exportLoading = true
-      const timeout = 1800
-      this.$services.customUserGroupUserInfoExport({
-        method: 'get',
-        dataType: 'blob',
-        timeout: timeout * 1000, // 单位：ms
-        data: {
-          group_id: this.id
-        },
-        headers: {
-          'x-msg-timeout': timeout // 单位：s
-        }
-      }).then((res) => {
-        this.exportLoading = false
-        console.log('RES', res)
-        const blob = new Blob([res.data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'})
-        const downloadElement = document.createElement('a')
-        const href = window.URL.createObjectURL(blob) // 创建下载的链接
-        downloadElement.href = href
-        downloadElement.download = `${this.groupName}.xlsx` // 下载后文件名
-        document.body.appendChild(downloadElement)
-        downloadElement.click() // 点击下载
-        document.body.removeChild(downloadElement) // 下载完成移除元素
-        window.URL.revokeObjectURL(href) // 释放掉blob对象
-      }).catch(() => {
-        this.exportLoading = false
-      })
-    },
-    /**
-     * 页面跳转
-     */
-    linkToPage (pageType) {
-      const {id, groupName, usersTotalCount} = this
-      if (pageType === 0) {
-        this.$router.push({path: 'customView', query: {id, groupName, usersTotalCount}})
-      } else if (pageType === 1) {
-        this.$router.push({path: 'managementView', query: {id, groupName, usersTotalCount}})
-      }
     }
   },
   beforeDestroy () {

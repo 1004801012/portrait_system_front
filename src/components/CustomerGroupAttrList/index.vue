@@ -59,7 +59,7 @@ export default {
     async loadTagAttrQuery () {
       let res = null
       const data = {
-        keyword: this.inputAttr
+        label_zh_name: this.inputAttr
       }
       try {
         res = await this.$services.getLabelList({data})
@@ -147,6 +147,7 @@ export default {
         item.label_list.forEach(subitem => {
           const subi = {};
           subi.name = subitem.label_zh_name
+          subi.label_en_name = subitem.label_en_name
           subi.id = null
           subi.parent_id = item.id
           subi.label_value_type = subitem.label_value_type
@@ -198,6 +199,7 @@ export default {
       console.log('handleNodeCollapse end', this.defaultExpandedKeys);
     },
     handleNodeClick(data, node) {
+      console.log('data',data);
       if (node.isLeaf) {
         this.$bus.$emit('attrSelected', data);
       }

@@ -139,6 +139,7 @@
         }
         let res = null;
         this.groupCondition = this.$refs.labelFormula.getGroupConditionDatas();
+        console.log(this.groupCondition);
         if ((this.groupCondition && !this.groupCondition.con.length) || this.$refs.labelFormula.checkInputsEmpty()) {
           this.$message({ message: '定义条件不能为空', showClose: true });
           return;

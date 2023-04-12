@@ -9,7 +9,7 @@
                 <i class="icon iconfont-dmp iconfont-dmp-close"></i>
               </a>
               <span class="name">{{ formula.name }}</span>
-              <div v-if="formula.dicts && formula.dicts.length > 0">
+              <div v-if="formula.options && formula.options.length > 0" style="display: flex">
                 <multiselect
                   v-model="formula.operatorValue"
                   class="operator"
@@ -27,15 +27,15 @@
                   open-direction="bottom"
                   placeholder="请选择-可模糊搜索"
                   :show-labels="false"
-                  track-by="c_sub_entry"
+                  track-by="sub_entry"
                   class="operator"
                   :customLabel="formatSelectLabel">
                   <span slot="noResult">暂无数据</span>
                 </multiselect>
               </div>
-              <div v-else>
+              <div v-else style="display: flex">
                 <multiselect
-                  v-if="formula.c_has_operator === '1' || formula.c_has_operator === '2'"
+                  v-if="formula.label_value_type === 's'"
                   v-model="formula.operatorValue"
                   class="operator"
                   :options="operators"
@@ -46,17 +46,16 @@
                   label="label">
                   <span slot="noResult">暂无数据</span>
                 </multiselect>
-                <el-date-picker
-                  v-if="formula.c_has_operator === '2'"
-                  v-model="formula.inputValue"
-                  class="input"
-                  type="date"
-                  format="yyyy-MM-dd"
-                  value-format="yyyyMMdd"
-                  placeholder="选择日期">
-                </el-date-picker>
+<!--                <el-date-picker-->
+<!--                  v-if="formula.label_value_type === 's'"-->
+<!--                  v-model="formula.inputValue"-->
+<!--                  class="input"-->
+<!--                  type="date"-->
+<!--                  format="yyyy-MM-dd"-->
+<!--                  value-format="yyyyMMdd"-->
+<!--                  placeholder="选择日期">-->
+<!--                </el-date-picker>-->
                 <el-input
-                  v-else
                   v-model.trim="formula.inputValue"
                   class="input"
                   :placeholder="formatPlaceholder(formula)"
@@ -99,6 +98,7 @@
   import {callback} from '@/common/func'
   import {setTagDicts, getTagDicts, setTagAttrQuery, getTagAttrQuery} from '@/common/auth'
   import Multiselect from 'vue-multiselect'
+  import 'vue-multiselect/dist/vue-multiselect.min.css'
 
   export default {
     name: 'CustomerGroupLabelFormula',
@@ -142,11 +142,11 @@
     },
     methods: {
       formatSelectLabel (dict) {
-        return (dict.c_tag_english_name === 'branch_name' || dict.c_tag_english_name === 'branch_code') ? dict.customer_dict_label : dict.c_dict_prompt
+        return dict.dict_prompt
       },
       handleAttrSelected (item) {
         // 下拉框属性数组，只有 c_has_operator = '0' 才有值
-        const options = this.getOptions(item)
+        const options = item.label_value_type === 'i' && item.dict_item_list || []
         const checkedIndex = this.getCheckedIndex()
         // 公式对象
         const obj = { ...item, options: options, // 下拉框属性值数组，c_has_operator = '0' 才有值
@@ -186,18 +186,6 @@
         const formBox = document.querySelector('.customer-group-add .container')
         formBox.scrollTop = formBox.scrollHeight
       },
-      getOptions (item) {
-        const tagDicts = getTagDicts();
-        let options;
-        if (tagDicts) {
-            options = tagDicts.filter(
-            (dict) => item.c_tag_category_id === dict.c_tag_category_id
-          )}
-        else {
-          options = [];
-        }
-        return options
-      },
       getTagAttrByName (tagEnglishName) {
         const tagAttrList = getTagAttrQuery() || []
         const getLeaf = (node, leafs) => {
@@ -217,7 +205,7 @@
         }
         let find = {}
         for (const attr of allTagAttrs) {
-          if (attr.c_tag_english_name === tagEnglishName) {
+          if (attr.label_en_name === tagEnglishName) {
             find = attr
             break
           }
@@ -285,7 +273,7 @@
 
         for (const group of this.groupConditionDatas) {
           for (const formula of group.subs) {
-            if (formula.dicts && formula.dicts.length > 0) {
+            if (formula.options && formula.options.length > 0) {
               if (!formula.optionValue) {
                 hasEmpty = true
               }
@@ -337,7 +325,7 @@
        */
       convertFormulaData (formula, isFirst = true) {
         const op = isFirst ? 1 : formula.currentOp
-        const fd = formula.c_tag_english_name
+        const fd = formula.label_en_name
         const hasOperator = formula.c_has_operator
         console.log('convertFormulaData hasOperator', hasOperator)
         let cmp = 4
@@ -355,10 +343,10 @@
         let showVal = val
         let desc = ''
         console.log(formula, cmpLabel)
-        if (formula.dicts && formula.dicts.length > 0) {
+        if (formula.options && formula.options.length > 0) {
           if (formula.optionValue) {
-            showVal = formula.optionValue.c_sub_entry
-            desc = formula.name + cmpLabel + formula.optionValue.c_dict_prompt
+            showVal = formula.optionValue.sub_entry
+            desc = formula.name + cmpLabel + formula.optionValue.dict_prompt
           } else {
             showVal = ''
             desc = formula.name + cmpLabel
@@ -374,14 +362,13 @@
           const options = formula.options
           if (options) {
             for (const option of options) {
-              if (option.c_dict_prompt === val) {
-                showVal = option.c_sub_entry
+              if (option.dict_prompt === val) {
+                showVal = option.sub_entry
                 break
               }
             }
           }
         }
-        desc += formula.c_tag_unit !== '/' ? formula.c_tag_unit : ''
         //      console.log('convertFormulaData op', op);
         return {op, fd, cmp, val: showVal, desc, c_has_operator: hasOperator}
       },
@@ -401,7 +388,7 @@
           return null
         }
         for (const dict of dicts) {
-          if (dict.c_dict_prompt === label || dict.c_sub_entry === label) {
+          if (dict.dict_prompt === label || dict.sub_entry === label) {
             return dict
           }
         }
@@ -434,7 +421,7 @@
 
               const subDict = {
                 name: name,
-                c_tag_english_name: fd,
+                label_en_name: fd,
                 c_has_operator: attr.c_has_operator,
                 inputValue: inputValue,
                 operatorValue: operator,
@@ -465,7 +452,7 @@
               subs: [
                 {
                   name: name,
-                  c_tag_english_name: fd,
+                  label_en_name: fd,
                   c_has_operator: attr.c_has_operator,
                   inputValue: inputValue,
                   operatorValue: operator,
@@ -500,8 +487,8 @@
             if (!window.CT.IS_XY) {
               if (Array.isArray(res.datas) && res.datas.length) {
                 res.datas.forEach((v) => {
-                  if (v.c_tag_english_name === 'branch_name' || v.c_tag_english_name === 'branch_code') {
-                    v.customer_dict_label = v.c_sub_entry + v.c_dict_prompt
+                  if (v.label_en_name === 'branch_name' || v.label_en_name === 'branch_code') {
+                    v.customer_dict_label = v.sub_entry + v.dict_prompt
                   }
                 })
               }
@@ -520,7 +507,7 @@
         let res = null
         const data = {}
         try {
-          res = await this.$services.tagAttrQry({data})
+          res = await this.$services.getLabelList({data})
           res &&
           callback(res, () => {
             setTagAttrQuery(res.data && res.data.children)
