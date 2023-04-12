@@ -35,7 +35,7 @@
               </div>
               <div v-else style="display: flex;align-items: center">
                 <multiselect
-                  v-if="formula.label_value_type === 'd'"
+                  v-if="formula.label_value_type === 'd' || formula.label_value_type === 's'"
                   v-model="formula.operatorValue"
                   class="operator"
                   :options="operators"
